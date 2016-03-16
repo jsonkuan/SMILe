@@ -2,7 +2,7 @@
 //  LeaderboardTableViewController.swift
 //  SMILe
 //
-//  Created by Jason Kuan on 15/03/16.
+//  Created by Jason Kuan on 16/03/16.
 //  Copyright © 2016 jsonkuan. All rights reserved.
 //
 
