@@ -1,35 +1,70 @@
-
+//
+//  LeaderboardTableViewController.swift
+//  SMILe
+//
+//  Created by Jason Kuan on 16/03/16.
+//  Copyright © 2016 jsonkuan. All rights reserved.
+//
 
 
 import UIKit
 
 class ScoreboardTableViewController: UITableViewController {
     
-    var players: [Player] = PlayerData().getPlayerFromData()
-
+    var people: [Player] = PlayerData().getPlayerFromData()
+    var gameScore = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
      }
-
+    
+    // TODO: - Get values for people[i].playerName && people[i].score
 
     // MARK: - TableViewDataSource
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return players.count
+        return people.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return players[section].gameType.count
+        return people[section].gameType.count
     }
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return players[section].playerName
+        return people[section].playerName
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("GameTypeCell", forIndexPath: indexPath)
+       
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TableViewCell
         
-        cell.textLabel?.text = players[indexPath.section].gameType[indexPath.row]
+        cell.gameType.text = people[indexPath.section].gameType[indexPath.row]
+        
+        cell.scoreButton.tag = indexPath.row
+        cell.scoreButton.addTarget(self, action: "pressedButton", forControlEvents: .TouchUpInside)
+    // TODO: - Button Not working (try "isFirstResponder")
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
+        cell.scoreTextField.becomeFirstResponder()
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func pressedButton(sender: UIButton) {
+        
+     //  TODO: - Increment the scoreLabel when the button is pressed 
+        
+        gameScore++
+    }
+    
+    
+    // MARK: - My Functions 
+    
+    func calculateLeader() {
+        // TODO: - Try using myArray.sort on the scores
     }
 }
