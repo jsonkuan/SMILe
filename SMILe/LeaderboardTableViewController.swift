@@ -54,18 +54,24 @@ class LeaderboardTableViewController: UITableViewController {
         }
     }
 
-    // TODO: - Display the players in array sorted by the highest score (people.totalScore)
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Rank", forIndexPath: indexPath)
+        var i = 0
+        
+        let sortedPeopleByHighestScore = people.sort{$0.totalScore > $1.totalScore}
 
-        if indexPath.section == 0 {
-            cell.textLabel?.text =  people[0].playerName
-        } else if indexPath.section == 1 {
-            cell.textLabel?.text = people[1 + indexPath.row].playerName
+        for(i = 0; i < people.count; i++) {
+            
+            
+            if indexPath.section == 0 {
+                cell.textLabel?.text =  sortedPeopleByHighestScore[0].playerName
+            } else if indexPath.section == 1 {
+                cell.textLabel?.text = sortedPeopleByHighestScore[1 + indexPath.row].playerName
+            }
         }
 
         return cell
     }
-
-
+    
+ 
 }
